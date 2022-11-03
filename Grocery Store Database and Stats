@@ -1,0 +1,35 @@
+--Create a grocery store database
+CREATE TABLE store (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, aisle INTEGER, price INTEGER);
+
+INSERT INTO store VALUES (1, "chicken soup", 4, 1, 3);
+INSERT INTO store VALUES (2, "mushroom soup", 2, 1, 3);
+INSERT INTO store VALUES (3, "dog food", 5, 4, 20);
+INSERT INTO store VALUES (4, "cat food", 4, 4, 15);
+INSERT INTO store VALUES (5, "tomato", 10, 10, 1);
+INSERT INTO store VALUES (6, "apple", 8, 10, 2);
+INSERT INTO store VALUES (7, "bread", 7, 2, 5);
+INSERT INTO store VALUES (8, "milk", 9, 3, 4);
+INSERT INTO store VALUES (9, "ice cream", 12, 3, 4);
+INSERT INTO store VALUES (10, "pasta", 7, 5, 3);
+INSERT INTO store VALUES (11, "juice", 3, 6, 4);
+INSERT INTO store VALUES (12, "corn", 10, 10, 1);
+INSERT INTO store VALUES (13, "strawberry", 4, 10, 6);
+INSERT INTO store VALUES (14, "grapes", 5, 10, 4);
+INSERT INTO store VALUES (15, "cookies", 8, 7, 5);
+
+--display the database ordered by number of total items in each aisle
+SElECT aisle, SUM (quantity) FROM store GROUP BY aisle;
+
+--display the database ordered by price. 
+SELECT * FROM store
+ORDER BY price desc; 
+
+--what is the avg price of a item in store? 
+SELECT AVG(price) "avg item price"
+FROM store;
+
+--what top 5 items the store has the most quantity of? 
+SELECT name, price, quantity 
+FROM store
+order by quantity desc
+limit 5; 
