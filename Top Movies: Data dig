@@ -112,28 +112,39 @@ INSERT INTO topmovies(Rank,Title,Studio,Worldwide,Domestic,DomesticPct,Overseas,
 INSERT INTO topmovies(Rank,Title,Studio,Worldwide,Domestic,DomesticPct,Overseas,OverseasPct,Year) VALUES (99,'Casino Royale','Sony',599.00,167.40,0.28,431.60,0.72,2006);
 INSERT INTO topmovies(Rank,Title,Studio,Worldwide,Domestic,DomesticPct,Overseas,OverseasPct,Year) VALUES (100,'Tangled','BV',591.80,200.80,0.34,391.00,0.66,2010);
 
+--The average box offices
 SELECT Round(AVG(Worldwide)) AS avg_Worldwide, Round(AVG(Domestic)) AS avg_Domestic, 
 Round(AVG(DomesticPct)*100) AS avg_DomesticPct, Round(AVG(Overseas)) AS avg_Overseas, Round(AVG(OverseasPct)*100) AS avg_OverseasPct  
 FROM topmovies;
 
+--The total sum made domestically by each studio
 SELECT Studio, Round(SUM(Domestic)) AS total_Domestic FROM topmovies
     Group BY Studio HAVING total_Domestic>2000 ORDER BY total_Domestic ASC;
     
+--The average domestic by studio
 SELECT Studio, Round(AVG(Domestic)) AS avg_Domestic FROM topmovies
     Group BY Studio HAVING avg_Domestic>300 ORDER BY avg_Domestic DESC;
     
+--Number of top movies by decade
 SELECT Count(*) AS "Number of Movies",
 CASE
-        WHEN Year > 2010 THEN "2010s"
-        WHEN Year > 2000 THEN "2000s"
-        WHEN Year > 1990 THEN "1990s"
-        WHEN Year > 1980 THEN "1980s"
+        WHEN Year > 2009 THEN "2010s"
+        WHEN Year > 1999 THEN "2000s"
+        WHEN Year > 1989 THEN "1990s"
+        WHEN Year > 1979 THEN "1980s"
         ELSE "1970s"
     END as "Decades"
 FROM topmovies
 GROUP BY "Decades" 
 ORDER BY "Descades";
 
+-- Movies making more than 500 domestically and 1000 overseas
 SELECT Title,Studio, Domestic, Overseas FROM topmovies
      WHERE CAST(Domestic AS INTEGER) > 500
      AND CAST(Overseas AS INTEGER) > 1000;
+
+--Movies with domestic or overseas percentages over 50%
+SELECT Studio,Round(AVG(DomesticPct)*100) AS "avgDomesticPct",Round(AVG(OverseasPct)*100) AS "avgOverseasPct"
+FROM topmovies GROUP BY Studio
+HAVING CAST("avgOverseasPct" AS INTEGER) > 50
+OR CAST ("avgDomesticPct" AS INTEGER) > 50;
