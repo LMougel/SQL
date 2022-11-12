@@ -1,0 +1,75 @@
+/* Create table about the people and what they do here */
+
+CREATE TABLE HoHchar (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fullname TEXT,
+    house TEXT);
+    
+INSERT INTO HoHchar (fullname, house) VALUES ("Rhaenyra Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Viserys I Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Otto Hightower", "Hightower");
+INSERT INTO HoHchar (fullname, house) VALUES ("Daemon Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Corlys Velaryon", "Velaryon");
+INSERT INTO HoHchar (fullname, house) VALUES ("Lyonel Strong", "Strong");
+INSERT INTO HoHchar (fullname, house) VALUES ("Vaemond Velaryon", "Velaryon");
+INSERT INTO HoHchar (fullname, house) VALUES ("Larys Strong", "Strong");
+INSERT INTO HoHchar (fullname, house) VALUES ("Alicent Hightower", "Hightower");
+INSERT INTO HoHchar (fullname, house) VALUES ("Aemond Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Jacaerys Velaryon", "Velaryon");
+INSERT INTO HoHchar (fullname, house) VALUES ("Aegon II Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Baela Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Rhaena Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Helaena Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Aegon III Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Lucerys Velaryon", "Velaryon");
+INSERT INTO HoHchar (fullname, house) VALUES ("Laenor Velaryon", "Velaryon");
+INSERT INTO HoHchar (fullname, house) VALUES ("Laena Velaryon", "Velaryon");
+INSERT INTO HoHchar (fullname, house) VALUES ("Aemma Arryn", "Arryn");
+INSERT INTO HoHchar (fullname, house) VALUES ("Rhaenys Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Harwin Strong", "Strong");
+INSERT INTO HoHchar (fullname, house) VALUES ("Viserys Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Jaehaerys Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Jaehaera Targaryen", "Targaryen");
+INSERT INTO HoHchar (fullname, house) VALUES ("Joffery Targaryen", "Targaryen");
+
+CREATE table marriage (id INTEGER PRIMARY KEY AUTOINCREMENT, HoHchar1_id INTEGER, HoHchar2_id INTEGER);
+INSERT INTO marriage (HoHchar1_id, HoHchar2_id) VALUES (1,4);
+INSERT INTO marriage (HoHchar1_id, HoHchar2_id) VALUES (1,18);
+INSERT INTO marriage (HoHchar1_id, HoHchar2_id) VALUES (20,2);
+INSERT INTO marriage (HoHchar1_id, HoHchar2_id) VALUES (19,4);
+INSERT INTO marriage (HoHchar1_id, HoHchar2_id) VALUES (9,2);
+INSERT INTO marriage (HoHchar1_id, HoHchar2_id) VALUES (12,15);
+
+CREATE table childern (id INTEGER PRIMARY KEY AUTOINCREMENT, HoHchar1_id INTEGER, HOHchar2_id INTEGER, HOHchar3_id INTEGER);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (1,10, 2);
+INSERT INTO childern (HoHchar1_id, HoHchar3_id) VALUES (9,3);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (11,1, 22);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (17,1, 22);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (26,1, 22);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (23,1,4);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (16,1, 4);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (25,15, 12);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (24,15, 12);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (12,9, 2);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (15,9, 2);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (10,9, 2);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (13,19, 4);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (14,19, 4);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (18,21, 5);
+INSERT INTO childern (HoHchar1_id, HoHchar2_id, HoHchar3_id) VALUES (19,21, 5);
+
+/* A list of all the married characters in House of Dragon
+SELECT a.fullname AS "Wife", b.fullname AS "Husband" FROM marriage 
+    JOIN HoHchar a
+    ON a.id = marriage.HoHchar1_id
+    JOIN HoHchar b
+    ON b.id = marriage.HoHchar2_id; 
+
+/* A list of all of the childern and their parents in House of Dragon
+SELECT a.fullname AS "Child", b.fullname AS "Mother", c.fullname AS "Father" FROM childern
+    JOIN HoHchar a
+    ON a.id = childern. HoHchar1_id
+    JOIN HoHchar b
+    ON b.id = childern.HoHchar2_id
+    JOIN HoHchar c
+    ON c.id =childern.Hohchar3_id;
